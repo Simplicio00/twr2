@@ -12,7 +12,7 @@ import './DashCadastrarClassificado.css'
 class DashboardCadastrarClassificado extends Component{
 
     constructor(props){
-        super(props)
+        super(props) 
         this.state = {
             idEquipamento: '',
             equipamento: []

@@ -44,9 +44,9 @@ class DashboardClassificado extends Component{
                         };        
 
 
-componentDidMount(){
-    this.buscarClassificadosAdm();
-}
+    componentDidMount(){
+        this.buscarClassificadosAdm();
+    }
 
     render(){
 
@@ -142,9 +142,11 @@ componentDidMount(){
                                 return(
                             <tr key={item.idClassificado}>
                                 <td id="td_input_adm">
+
                                     <form id="form_input_user_adm" action="">
                                         <input type="checkbox" name="" id=""/>
                                     </form>
+                                    
                                 </td>
                                 <td id="td_imagem_adm"></td>
                                 <td id="nome_usuario" style={{cursor:"pointer"}} onClick={ () => this.redirecionarClassificado(item.idClassificado)} >{item.idEquipamentoNavigation.nomeEquipamento}</td>

@@ -18,7 +18,7 @@ import historicoCompras from './pages/historicoDeCompras/HistoricoCompras'
 // páginas adm
 import listarUser from './pages/adm/listarUsuario/DashboardUsuario'
 import listarCategoria from './pages/adm/listarCategoria/DashboardListarCategoria'
-import cadastrarCategoria from './pages/adm/cadastrarEquipamento/cadastroEquipamento'
+import cadastrarCategoria from './pages/adm/cadastrarCategoria/DashboardCadastrarCategoria'
 import listarEquipamento from './pages/adm/listarEquipamento/listarEquipamento'
 import cadastrarEquipamento from './pages/adm/cadastrarEquipamento/cadastroEquipamento'
 import listarClassificado from './pages/adm/listarClassificado/DashboardClassificados'

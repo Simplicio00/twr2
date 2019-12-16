@@ -21,13 +21,30 @@ class Perfil extends Component {
             nomeUsuario : '',
             nomeCompleto: '',
             email: '',
+            senha: {},
             loading : false 
         }
         this.mostrar = this.mostrar.bind(this);
         this.userLogado = this.userLogado.bind(this);
     }
 
+    componentDidMount(){
+        this.userLogado();
+    }
 
+    alterarSenha(){
+        fetch('https://localhost:5001/api/Usuario/changePassword', { 
+        method:"PATCH",    
+        headers: { "Content-Type" : "application/json", 
+        'authorization' : 'Bearer ' + localStorage.getItem('autenticarlogin')}
+        })
+        .then(resposta => resposta.json())
+        .then(data => {
+        this.setState({ senha : data })
+        this.setState({ loading : false });
+        })
+        .catch((erro) => console.log(erro))
+        }
 
     userLogado(){
         this.setState({loading : true});   
@@ -44,12 +61,6 @@ class Perfil extends Component {
         })
         .catch((erro) => console.log(erro))
         }
-
-
-    componentDidMount(){
-        this.userLogado();
-    }
-
 
     mostrar(){
         var y = document.getElementById("pord");
