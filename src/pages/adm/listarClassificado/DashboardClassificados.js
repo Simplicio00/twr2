@@ -16,11 +16,16 @@ class DashboardClassificado extends Component{
     constructor(props){
         super(props);
         this.state =  {
-            classificadoAdm: [],
-            user: []
+            classificadoAdm: []
                     }
-        this.buscarClassificadosAdm = this.buscarClassificadosAdm.bind(this)
+                        
+            this.buscarClassificadosAdm = this.buscarClassificadosAdm.bind(this)
+            this.redirecionarClassificado = this.redirecionarClassificado.bind(this)
                         }
+    
+    redirecionarClassificado(id){
+        window.location.href = '/classificadoInteresses?id=' + id
+    }
 
     buscarClassificadosAdm(){
     fetch('https://localhost:5001/api/Classificado/adm', {
@@ -29,7 +34,7 @@ class DashboardClassificado extends Component{
             "Authorization": 'Bearer ' + localStorage.getItem('autenticarlogin'), 
                  }
 
-                                                    }
+                                                        }
         )
         .then(res => res.json())
         .then(data => {
@@ -83,13 +88,13 @@ componentDidMount(){
                 </div>
             </div>
             <div class="icon_menu_lateral_adm">
-                <img src={iconeUser} alt="ícone de equipamentos"/>
+            <a href="./DashUsuario"><img src={iconeUser} alt="ícone de equipamentos"/></a>
             </div>
             <div class="icon_menu_lateral_adm">
-                <img src={iconeComp} alt="ícone de classificados"/>
+            <a href="./listarEquipamento">    <img src={iconeComp} alt="ícone de classificados"/></a>
             </div>
             <div class="icon_menu_lateral_adm">
-                <img src={iconeCat} alt="ícone de categorias"/>
+            <a href="./listarCategoria">   <img src={iconeCat} alt="ícone de categorias"/></a>
             </div>
             <div class="icon_menu_lateral_adm">
                 <img src={iconeLogout} alt="ícone de saída"/>
@@ -142,7 +147,7 @@ componentDidMount(){
                                     </form>
                                 </td>
                                 <td id="td_imagem_adm"></td>
-                                <td id="nome_usuario">{item.idEquipamentoNavigation.nomeEquipamento}</td>
+                                <td id="nome_usuario" style={{cursor:"pointer"}} onClick={ () => this.redirecionarClassificado(item.idClassificado)} >{item.idEquipamentoNavigation.nomeEquipamento}</td>
                                 <td>{item.fimDeVidaUtil}</td>
                                 <td>{item.numeroDeSerie}</td>
                                 <td id="numero_compras_user">{item.codigoClassificado}</td>

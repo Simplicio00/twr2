@@ -16,10 +16,9 @@ class DashboardCadastrarClassificado extends Component{
         this.state = {
             idEquipamento: '',
             equipamento: []
-        }
+                    }
         this.cutUrl = this.cutUrl.bind(this)
         this.buscarClassificadoPorId = this.buscarClassificadoPorId.bind(this)
-
     }
 
     async componentDidMount(){
@@ -86,19 +85,19 @@ class DashboardCadastrarClassificado extends Component{
             <div class="identificador_menu_lateral_adm">
                 <div class="identificador_menu_lateral_cor_adm"></div>
                 <div class="icon_menu_lateral_adm">
-                    <img src={iconeFile}/>
-                </div>
+                <a href="./listarClassificado"> <img src={iconeFile}/> </a>
+            </div>
             </div>
             <div class="icon_menu_lateral_adm">
-            <img src={iconeUser}/>
+            <a href="./DashUsuario"><img src={iconeUser}/></a>
 
             </div>
             <div class="icon_menu_lateral_adm">
-            <img src={iconeLaptop}/>
+           <a href="./listarEquipamento"> <img style={{cursor:"pointer"}}  src={iconeLaptop}/></a>
 
             </div>
             <div class="icon_menu_lateral_adm">
-            <img src={iconeCat}/>
+            <a href="./listarCategoria"><img src={iconeCat}/></a>
 
             </div>
             <div class="icon_menu_lateral_adm">
@@ -152,7 +151,7 @@ class DashboardCadastrarClassificado extends Component{
                                     <div>
                                         <form id="inputs_classificado_01">
                                             <div class="formatando_input">
-                                                <label for=""><b>preço</b></label>
+                                                <label for=""><b>Preco</b></label>
                                                 <input class="input_classificado_adm" type="text"/>
                                             </div>
                                             <div class="formatando_input">
@@ -207,11 +206,11 @@ class DashboardCadastrarClassificado extends Component{
                                     <div class="espacamento_info">
                                         <div class="mj6yt">
                                             <p>
-                                                <b>nome</b>
+                                                <b>Nome</b>
                                             </p>
                                         </div>
                                         <div>
-                                            <p>MacBookPro</p>
+                                            <p>{this.state.equipamento.nomeEquipamento}</p>
                                         </div>
                                     </div>
                                     <div class="espacamento_info">
@@ -221,7 +220,7 @@ class DashboardCadastrarClassificado extends Component{
                                             </p>
                                         </div>
                                         <div>
-                                            <p>256GB</p>
+                                            <p>{this.state.equipamento.ssd}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -234,7 +233,7 @@ class DashboardCadastrarClassificado extends Component{
                                             </p>
                                         </div>
                                         <div>
-                                            <p>Apple</p>
+                                            <p>{this.state.equipamento.marca}</p>
                                         </div>
                                     </div>
                                     <div>
@@ -244,7 +243,7 @@ class DashboardCadastrarClassificado extends Component{
                                             </p>
                                         </div>
                                         <div>
-                                            <p>Não possui</p>
+                                            <p>{this.state.equipamento.hd}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -257,7 +256,7 @@ class DashboardCadastrarClassificado extends Component{
                                             </p>
                                         </div>
                                         <div>
-                                            <p>MUHP2</p>
+                                            <p>{this.state.equipamento.modelo}</p>
                                         </div>
                                     </div>
                                     <div>
@@ -267,7 +266,7 @@ class DashboardCadastrarClassificado extends Component{
                                             </p>
                                         </div>
                                         <div>
-                                            <p>Intel Iris Plus Graphics 640</p>
+                                            <p>{this.state.equipamento.placaDeVideo}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -281,7 +280,7 @@ class DashboardCadastrarClassificado extends Component{
                                                 </p>
                                             </div>
                                             <div>
-                                                <p>MacOS</p>
+                                                <p>{this.state.equipamento.sistemaOperacional}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -292,7 +291,7 @@ class DashboardCadastrarClassificado extends Component{
                                             </p>
                                         </div>
                                         <div>
-                                            <p>Bivolt</p>
+                                            <p>{this.state.equipamento.alimentacao}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -306,7 +305,7 @@ class DashboardCadastrarClassificado extends Component{
                                                 </p>
                                             </div>
                                             <div>
-                                                <p>13.3”</p>
+                                                <p>{this.state.equipamento.polegada}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -317,7 +316,7 @@ class DashboardCadastrarClassificado extends Component{
                                             </p>
                                         </div>
                                         <div>
-                                            <p>2,3kg</p>
+                                            <p>{this.state.equipamento.peso}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -331,7 +330,7 @@ class DashboardCadastrarClassificado extends Component{
                                                 </p>
                                             </div>
                                             <div>
-                                                <p>Intel core i5</p>
+                                                <p>{this.state.equipamento.processador}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -342,7 +341,7 @@ class DashboardCadastrarClassificado extends Component{
                                             </p>
                                         </div>
                                         <div>
-                                            <p>32,9x6,9x23,8cm</p>
+                                            <p>{this.state.equipamento.dimensoes}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -355,7 +354,7 @@ class DashboardCadastrarClassificado extends Component{
                                             </p>
                                         </div>
                                         <div>
-                                            <p>8GB RAM</p>
+                                            <p>{this.state.equipamento.memoriaRam}</p>
                                         </div>
                                     </div>
                                 </div>

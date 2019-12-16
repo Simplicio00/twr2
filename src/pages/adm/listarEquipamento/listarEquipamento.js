@@ -79,20 +79,20 @@ backgroundSize: "100%, 60em"}} >
         <div class="identificador_menu_lateral_adm">
             <div class="identificador_menu_lateral_cor_adm"></div>
             <div class="icon_menu_lateral_adm">
-                <img src={iconeLaptop} alt="ícone de um laptop"/>
+            <a href="./listarEquipamento">   <img src={iconeLaptop} alt="ícone de um laptop"/> </a>
             </div>
         </div>
         <div class="icon_menu_lateral_adm">
-            <img src={iconeFile} alt="ícone de equipamentos"/>
+        <a href="./listarClassificado">  <img src={iconeFile} alt="ícone de equipamentos"/></a>
         </div>
         <div class="icon_menu_lateral_adm">
-            <img src={iconeUser} alt="ícone de classificados"/>
+        <a href="./DashUsuario"> <img src={iconeUser} alt="ícone de classificados"/></a>
         </div>
         <div class="icon_menu_lateral_adm">
-            <img src={iconeCat} alt="ícone de categorias"/>
+        <a href="./listarCategoria"> <img src={iconeCat} alt="ícone de categorias"/></a>
         </div>
         <div class="icon_menu_lateral_adm">
-            <img src={iconeLogout} alt="ícone de saída"/>
+         <img src={iconeLogout} alt="ícone de saída"/>
         </div>
     </nav>
 
@@ -133,24 +133,24 @@ backgroundSize: "100%, 60em"}} >
                                 </th>
                             </tr>
                         </thead>
+                        {this.state.equipamento.map( Equipamento => {
+                            return (
                         <tbody>
                             <br/>
-                        {this.state.equipamento.map(function(Equipamento){
-                            return (
-                                
-                        <tr  key={Equipamento.idEquipamento}  style={{marginTop:"2em"}}>
+
+                            <tr  key={Equipamento.idEquipamento}  style={{marginTop:"2em"}}>
                                 <td  id="nome_usuario">{Equipamento.marca}</td>
                                 <td style={{cursor:"pointer"}} > {Equipamento.nomeEquipamento}</td>
                                 <td>{Equipamento.modelo}</td>
                                 <td id="numero_compras_user">{Equipamento.sistemaOperacional}</td>
                                 <td id="botao_delete">{Equipamento.processador}</td>
-                                <td onClick={ () => this.encaminharEquipamento(this.state.equipamento.idEquipamento)}>teste</td>
+                                <button onClick={ () => this.encaminharEquipamento(Equipamento.idEquipamento)}>Encaminhar</button>
                             </tr>
+                            
+                        </tbody>
                             )                                               }
                             )
                             }
-                            
-                        </tbody>
                     </table>
                 </div>
             </div>

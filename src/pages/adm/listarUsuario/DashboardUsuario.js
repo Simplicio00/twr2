@@ -6,6 +6,7 @@ import iconeFile from '../../../assets/img/file.png';
 import iconeCat from '../../../assets/img/categorias.png';
 import iconeLogout from '../../../assets/img/logout.png';
 import temaDeFundo from '../../../assets/img/semtitulo.png';
+import iconeDeletar from '../../../assets/img/delete-photo.png';
 
 
 
@@ -95,19 +96,18 @@ class DashBoardUsuario extends Component{
             <div class="identificador_menu_lateral_adm">
                 <div class="identificador_menu_lateral_cor_adm"></div>
                 <div class="icon_menu_lateral_adm">
-                    <img src={iconeUser}/>
+                <a href="./DashUsuario"><img src={iconeUser}/></a>
                 </div>
             </div>
             <div class="icon_menu_lateral_adm">
-            <img src={iconeLaptop}/>
+            <a href="./listarEquipamento"><img src={iconeLaptop}/></a>
+            </div>
 
+            <div class="icon_menu_lateral_adm">
+            <a href="./listarClassificado"><img src={iconeFile}/></a>
             </div>
             <div class="icon_menu_lateral_adm">
-            <img src={iconeFile}/>
-
-            </div>
-            <div class="icon_menu_lateral_adm">
-            <img src={iconeCat}/>
+            <a href="./listarCategoria"> <img src={iconeCat}/></a>
 
             </div>
             <div class="icon_menu_lateral_adm">
@@ -179,7 +179,7 @@ class DashBoardUsuario extends Component{
                             <td id="botao_delete">
                                 <a href="#">
                                     <div id="box_icon_delete_user">
-                                        {/* <img id="icon_delete_user" src="../assets/img/delete-photo.png" alt="icone do botão de deletar um usuário"> */}
+                                        <img id="icon_delete_user" src={iconeDeletar} alt="icone do botão de deletar um usuário"/>
                                     </div>
                                 </a>
                             </td>

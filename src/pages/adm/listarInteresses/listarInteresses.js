@@ -10,7 +10,55 @@ import './listarInteresses.css';
 
 class listarInteresses extends Component{
 
-    
+    constructor(props){
+        super(props)
+        this.state = {
+            idClassificado: '',
+            classificado: [],
+            interessados: []
+        }
+        this.cutUrlInt = this.cutUrlInt.bind(this)
+        this.buscarClassificadoId = this.buscarClassificadoId.bind(this)
+        this.buscarInteressados = this.buscarInteressados.bind(this)
+    }
+
+    async componentDidMount(){
+        await this.cutUrlInt()
+        this.buscarClassificadoId()
+        this.buscarInteressados()
+    }
+
+    cutUrlInt(){
+        var url = window.location.href
+        var id = url.split('=')[1]
+        this.setState({ idClassificado : id })
+    }
+
+    buscarClassificadoId(){
+        fetch('https://localhost:5001/api/classificado/' + this.state.idClassificado, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": 'Bearer ' + localStorage.getItem('autenticarlogin')
+                    }
+        })
+        .then(resposta => resposta.json())  
+        .then(data => {this.setState({ classificado : data })
+        ;console.log(this.state.classificado)}
+        ).catch((erro) => console.log(erro))
+    }
+
+    buscarInteressados(){
+        fetch('https://localhost:5001/api/classificado/'+ this.state.idClassificado + '/interesses', {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": 'Bearer ' + localStorage.getItem('autenticarlogin')
+                    }
+        })
+        .then(resposta => resposta.json())  
+        .then(data => {this.setState({ interessados : data })
+        }
+        ).catch((erro) => console.log(erro))
+    }
     
    
 
@@ -98,19 +146,19 @@ class listarInteresses extends Component{
                                         <form id="inputs_classificado_01">
                                             <div class="formatando_input">
                                                 <label class="label" for=""><b>preço</b></label>
-                                                <p class="input_classificado_adm">R$ 2.000,00</p>
+                                                <p class="input_classificado_adm">R$ {this.state.classificado.preco}</p>
                                             </div>
                                             <div class="formatando_input">
                                                 <label class="label" for=""><b>número de série</b></label>
-                                                <p class="input_classificado_adm">EXYYY568NMNXX</p>
+                                                <p class="input_classificado_adm">{this.state.classificado.numeroDeSerie}</p>
                                             </div>
                                             <div class="formatando_input">
                                                 <label class="label" for=""><b>código</b></label>
-                                                <p class="input_classificado_adm">0001</p>
+                                                <p class="input_classificado_adm">{this.state.classificado.codigoClassificado}</p>
                                             </div>
                                             <div class="formatando_input">
                                                 <label class="label" for=""><b>fim da vida util</b></label>
-                                                <p class="input_classificado_adm">18/08/2019</p>
+                                                <p class="input_classificado_adm">{this.state.classificado.fimDeVidaUtil}</p>
                                             </div>
                                         </form>
                                     </div>
@@ -118,16 +166,15 @@ class listarInteresses extends Component{
                                         <form class="inputs_classificado_02" action="">
                                             <div class="formatando_input" style={{display: "flex"}}>
                                                 <label class="label" for=""><b>data de fabricação</b></label>
-                                                <p class="input_classificado_adm">10/06/2017</p>
+                                                <p class="input_classificado_adm">{this.state.classificado.dataFabricacao}</p>
                                             </div>
                                         </form>
                                     </div>
                                     <div>
                                         <form class="inputs_classificado_02" action="">
                                             <div class="formatando_input">
-                                                <label class="label" for=""><b>softwares inclusos</b></label>
-                                                <p class="input_classificado_adm" style={{width: "100%", height: "54px"}}>Mail, Agenda, iCal, Mac App Store, iTunes, Safari, Time Machine, FaceTime, Photo Booth, Mission Control, Launchpad, AirDrop, Resume, Salvar Automaticamente, Versões, Visualização Rápida, Spotlight, QuickTime
-                                                    e muito mais . . .</p>
+                                                <label class="label" for=""><b>Softwares inclusos</b></label>
+                                                <p class="input_classificado_adm" style={{width: "100%", height: "54px"}}>{this.state.classificado.softwaresInclusos}</p>
                                             </div>
                                         </form>
                                     </div>
@@ -137,7 +184,7 @@ class listarInteresses extends Component{
                                 <form action="" class="inputs_classificado_02" style={{marginLeft: "0"}}>
                                     <div class="formatando_input">
                                         <label class="label" for=""><b>avaliação</b></label>
-                                        <p class="input_classificado_adm" style={{width: "100%", height: "15.625em"}}>  </p>
+                                        <p class="input_classificado_adm" style={{width: "100%", height: "15.625em"}}>{this.state.classificado.avaliacao}</p>
 
                                     </div>
                                 </form>
@@ -147,19 +194,20 @@ class listarInteresses extends Component{
                             </div>
                             <div style={{marginTop: "25px"}}>
                                 <p><b style={{color: "#fff", textTransform: "uppercase"}}>interessados</b></p>
-                                <div class="user_interessado">
+
+                                {this.state.interessados.map( item => {
+                                    return(
+                                    <div class="user_interessado" key={item.idUsuarioNavigation.idUsuario}>
                                     <div class="fotoUser">
                                     </div>
                                     <div class="nomeUser">
-                                        <p>Victor Costa</p>
+                                        <p>{item.idUsuarioNavigation.nomeUsuario}</p>
                                     </div>
                                     <div class="nomeCompletoUser">
-                                        <p>
-                                            Victor Bezerra Costa
-                                        </p>
+                                        <p>{item.idUsuarioNavigation.nomeCompleto}</p>
                                     </div>
                                     <div class="emailUser">
-                                        <p>victor_bc@outlook.com</p>
+                                        <p>{item.idUsuarioNavigation.email}</p>
                                     </div>
                                     <div class="botaoUser">
                                         <button type="submit" style={{cursor:"pointer"}}>
@@ -167,6 +215,7 @@ class listarInteresses extends Component{
                                         </button>
                                     </div>
                                 </div>
+                                )})}
                                 
                         </div>
                     </div>
