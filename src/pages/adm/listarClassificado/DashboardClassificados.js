@@ -16,10 +16,10 @@ class DashboardClassificado extends Component{
     constructor(props){
         super(props);
         this.state =  {
-            classificadoAdm: []
+            intclassificado: []
                     }
                         
-            this.buscarClassificadosAdm = this.buscarClassificadosAdm.bind(this)
+            this.buscarClassificadosInteresse = this.buscarClassificadosInteresse.bind(this)
             this.redirecionarClassificado = this.redirecionarClassificado.bind(this)
                         }
     
@@ -27,8 +27,8 @@ class DashboardClassificado extends Component{
         window.location.href = '/classificadoInteresses?id=' + id
     }
 
-    buscarClassificadosAdm(){
-    fetch('https://localhost:5001/api/Classificado/adm', {
+    buscarClassificadosInteresse(){
+    fetch('https://localhost:5001/api/classificado/interesse', {
         headers: {
             "Content-Type": "application/json",
             "Authorization": 'Bearer ' + localStorage.getItem('autenticarlogin'), 
@@ -38,14 +38,14 @@ class DashboardClassificado extends Component{
         )
         .then(res => res.json())
         .then(data => {
-            this.setState({classificadoAdm : data})
+            this.setState({intclassificado : data})
                         })
     .catch((erro) => console.log(erro))
                         };        
 
 
     componentDidMount(){
-        this.buscarClassificadosAdm();
+        this.buscarClassificadosInteresse();
     }
 
     render(){
@@ -138,7 +138,7 @@ class DashboardClassificado extends Component{
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.classificadoAdm.map( item => {
+                            {this.state.intclassificado.map( item => {
                                 return(
                             <tr key={item.idClassificado}>
                                 <td id="td_input_adm">

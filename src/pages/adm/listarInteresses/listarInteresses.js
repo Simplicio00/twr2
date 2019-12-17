@@ -14,13 +14,21 @@ class listarInteresses extends Component{
         super(props)
         this.state = {
             idClassificado: '',
+            idInteresse: '',
             classificado: [],
-            interessados: []
+            interessados: [],
+            // comprador: '',
+            // compra: []
         }
         this.cutUrlInt = this.cutUrlInt.bind(this)
         this.buscarClassificadoId = this.buscarClassificadoId.bind(this)
         this.buscarInteressados = this.buscarInteressados.bind(this)
+        this.atualizaCompra = this.atualizaCompra.bind(this)
     }
+
+    // atualizaCompra(event){
+    //     this.setState({comprador : event.target.value})
+    // }
 
     async componentDidMount(){
         await this.cutUrlInt()
@@ -33,6 +41,20 @@ class listarInteresses extends Component{
         var id = url.split('=')[1]
         this.setState({ idClassificado : id })
     }
+
+    // aprovarCompra(){
+    //     fetch('https://localhost:5001/api/interesse/' + this.state.idInteresse + '/vender', {
+    //         method:'PUT',
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             "Authorization": 'Bearer ' + localStorage.getItem('autenticarlogin')
+    //                 }
+    //     })
+    //     .then(resposta => resposta.json())  
+    //     .then(data => {this.setState({ compra : data })
+    //     ;console.log(this.state.compra)}
+    //     ).catch((erro) => console.log(erro))
+    // }
 
     buscarClassificadoId(){
         fetch('https://localhost:5001/api/classificado/' + this.state.idClassificado, {
@@ -210,9 +232,7 @@ class listarInteresses extends Component{
                                         <p>{item.idUsuarioNavigation.email}</p>
                                     </div>
                                     <div class="botaoUser">
-                                        <button type="submit" style={{cursor:"pointer"}}>
-                                            Definir Comprador
-                                        </button>
+                                        <button type="submit" onClick={a => this.aprovarCompra(compra.idInteresse)}  style={{cursor:"pointer"}}>Definir Comprador</button>
                                     </div>
                                 </div>
                                 )})}

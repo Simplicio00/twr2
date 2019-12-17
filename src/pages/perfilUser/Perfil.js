@@ -32,6 +32,15 @@ class Perfil extends Component {
         this.userLogado();
     }
 
+    logout() {
+        localStorage.clear(); 
+        // -> CHAMAR NO BOTÃO DE SAIR 
+        
+        window.location.href = './pages/Apresentacao.js';  
+        // -> REDIRECIONA PARA A PÁGINA DE APRESENTAÇÃO //(INSERIR O LINK DA PÁGINA)
+    }
+    
+
     atualizaSenha(event){
         this.setState({senha: event.target.value})
                     }
