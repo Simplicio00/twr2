@@ -20,23 +20,6 @@ class PaginaDoProduto extends Component{
         this.buscarClassificadoPorId()
     }
 
-    // declararInteresse(){
-    //     fetch('https://localhost:5001/api/interesse', {
-    //       method: 'POST',
-    //       body: JSON.stringify({ idClassificado: classificado.idClassificado }),
-    //       headers: {
-    //         'Content-type': 'application/json',
-    //         'authorization': 'Bearer ' + localStorage.getItem('autenticarlogin')
-    //       }
-    //     }).then(resposta => {
-    //         if (resposta.status === 200) {
-    //           console.log('Interesse cadastrado no sistema')
-    //                                     }
-    //         else {
-    //           console.log(JSON.stringify({ idClassificado: classificado.idClassificado }))
-    //             }
-    //       })}
-
     removerIdDaUrl(){
         var url = window.location.href
         var id = url.split('=')[1]
@@ -98,7 +81,28 @@ class PaginaDoProduto extends Component{
                        <h1 className="box2_cap_titulo">{this.state.nomeEquipamento}</h1>
                        <h4 className="box2_cap_cod"> Código: {this.state.classificado.codigoClassificado}</h4>
                            <h2 className="box2_cap_preco">Por: R$ {this.state.classificado.preco}</h2>
-                           <button className="box2_cap_button" style={{ cursor: 'pointer' }}>Registrar interesse</button>
+                           <button className="box2_cap_button" style={{ cursor: 'pointer' }}
+                           onClick={() => {
+                            console.log(this.state.idClassificado)
+                            fetch('https://localhost:5001/api/interesse', {
+                                method: 'POST',
+                                body: JSON.stringify({ idClassificado: this.state.idClassificado }),
+                                headers: {
+                                    'Content-type': 'application/json',
+                                    'authorization': 'Bearer ' + localStorage.getItem('autenticarlogin')
+                                }
+                            })
+                                .then(resposta => {
+                                    if (resposta.status === 200) {
+                                        console.log('Cadastro de interesse concluído com sucesso')
+                                    }
+                                    else {
+                                        console.log(JSON.stringify({ idClassificado: this.state.idClassificado }))
+                                    }
+                                })
+                        }}
+                           
+                           >Registrar interesse</button>
                    </div>
                </div>
 

@@ -18,21 +18,26 @@ class Perfil extends Component {
         super(props);
         this.state = {
             gUser : [],
-            nomeUsuario : '',
-            nomeCompleto: '',
-            email: '',
-            senha: {},
+            altSenha : [],
+            senha: '',  
             loading : false 
         }
-        this.mostrar = this.mostrar.bind(this);
-        this.userLogado = this.userLogado.bind(this);
+        this.mostrar = this.mostrar.bind(this)
+        this.userLogado = this.userLogado.bind(this)
+        this.alterarSenha = this.alterarSenha.bind(this)
+        this.atualizaSenha = this.atualizaSenha.bind(this)
     }
 
     componentDidMount(){
         this.userLogado();
     }
 
-    alterarSenha(){
+    atualizaSenha(event){
+        this.setState({senha: event.target.value})
+                    }
+
+    alterarSenha = () => {
+        this.setState({loading : true});   
         fetch('https://localhost:5001/api/Usuario/changePassword', { 
         method:"PATCH",    
         headers: { "Content-Type" : "application/json", 
@@ -40,7 +45,7 @@ class Perfil extends Component {
         })
         .then(resposta => resposta.json())
         .then(data => {
-        this.setState({ senha : data })
+        this.setState({ altSenha : data })
         this.setState({ loading : false });
         })
         .catch((erro) => console.log(erro))
@@ -48,8 +53,6 @@ class Perfil extends Component {
 
     userLogado(){
         this.setState({loading : true});   
-        
-       
         fetch('https://localhost:5001/api/Usuario/gUser', {     
         headers: { "Content-Type" : "application/json", 
         'authorization' : 'Bearer ' + localStorage.getItem('autenticarlogin')}
@@ -60,7 +63,7 @@ class Perfil extends Component {
         this.setState({ loading : false });
         })
         .catch((erro) => console.log(erro))
-        }
+                }
 
     mostrar(){
         var y = document.getElementById("pord");
@@ -84,7 +87,7 @@ class Perfil extends Component {
 
 
     render(){
-        console.log(this.state.gUser.data)
+        console.log(this.state.altSenha )
         return(
             <body>
                 <Cabecalho/>
@@ -92,9 +95,6 @@ class Perfil extends Component {
         <section id="po-ord-sec-1-perf">
             
         <div id="po-ord-div-2-perf">
-
-                {/* {this.state.user.map(function(Usuario){
-                    return( */}
             <div id="contorno-style" >
                 
                 <div id="po-ord-div-3-flex-perf" key={this.state.gUser} >
@@ -110,28 +110,27 @@ class Perfil extends Component {
                     {this.state.gUser.email}
                         </div>
                     <div id="po-ord-div-4-hr-perf"><hr/></div>
-                    <div id="pord">
-                        <div id="pord-div-4-flex-perf">
-                            <div id="pord-div-5-h3-txt"> <h4>Segurança</h4> <img src={img1} /></div>
-                            <div id="pord-div-5-input-perf">
-                                <label for="#">Nova senha</label>
-                                <input required type="password" />
-                                <label for="#">Confirme a nova senha</label>
-                                <input required type="password" />
-                            </div>
+                            <div id="pord">
+                                <form>
+                                    <div id="pord-div-4-flex-perf">
+                                    <div id="pord-div-5-h3-txt"> <h4>Segurança</h4> <img src={img1} /></div>
+                                    <div id="pord-div-5-input-perf">
+                                            <label for="#">Nova senha</label>
+                                            <input value={this.state.altSenha.senha} onChange={this.alterarSenha} required type="password" />
+                                            </div>
+                                        </div>
+                                        <div id="pord-div-5-btn-perf">  
+                                            <button type="submit">Confirmar</button> <button onClick={this.mostrar}>Cancelar</button>
+                                        </div>
+                                </form>
+                         </div>
+                        <div id="po-ord-div-4-flex-btn-perf">
+                            <button onClick={this.mostrar}>Alterar senha <div class="btn-img"><img src={img2} /></div></button> <button> Sair <div class="btn-img"><img src={img3}/></div></button>
                         </div>
-                        <div id="pord-div-5-btn-perf">  
-                                <button>Confirmar</button> <button onClick={this.mostrar}>Cancelar</button>
-                            </div>
-
-                    </div>
-                    <div id="po-ord-div-4-flex-btn-perf">
-                        <button onClick={this.mostrar}>Alterar senha <div class="btn-img"><img src={img2} /></div></button> <button> Sair <div class="btn-img"><img src={img3}/></div></button>
-                    </div>
                 </div>
 
             </div>
-                    {/* )})} */}
+                  
         </div>
     </section>
 </main>

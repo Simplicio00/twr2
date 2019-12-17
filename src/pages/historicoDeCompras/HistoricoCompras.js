@@ -7,6 +7,31 @@ import Cabecalho from '../../componentes/cabecalho/Cabecalho';
 
 class HistoricoCompras extends Component{
 
+    
+    constructor(props){
+        super(props);
+        this.state = {
+            listCompra: [],
+            loading : false 
+        }
+        this.buscarCompra = this.buscarCompra.bind(this);
+    }
+
+    componentDidMount(){
+        this.buscarCompra() 
+    }
+
+    buscarCompra(){
+                    fetch('https://localhost:5001/api/interesse/listInteresses', {
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": 'Bearer ' + localStorage.getItem('autenticarlogin')
+                                }
+                    }).then(resposta => resposta.json())
+                    .then(data => {this.setState({listCompra : data})
+                    this.setState({loading : false});
+                    }).catch((erro) => console.log(erro))
+                }
   
     render(){
         return(

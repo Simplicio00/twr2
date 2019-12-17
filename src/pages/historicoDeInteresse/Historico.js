@@ -21,7 +21,7 @@ class Historico extends Component{
     }
 
     buscarInteresse(){
-        fetch('https://localhost:5001/api/interesse/listInteresse', {
+        fetch('https://localhost:5001/api/interesse/listInteresses', {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": 'Bearer ' + localStorage.getItem('autenticarlogin')
@@ -58,12 +58,12 @@ class Historico extends Component{
                            <td
                            style= {{ backgroundColor: "white", marginbottom: "1.18rem",     margintop: "1.2rem",
                            width: "100%", height: "1.5rem", display: "flex", justifyContent:"flex-end", color: "gray", fontweight: "400", boxshadow: "none"}}>
-                        <h3>data</h3></td>
+                        <h3></h3></td>
                         
                        </tr>
 
-                    {this.state.listInteresse.map(item => {
-                        return(
+                {this.state.listInteresse.map(item => {
+                return(
                      <tr key={item.idInteresse}>
                             <td> <img src={prdt}/>
                             <div className="posicao-5-ord-par-hist">
@@ -78,7 +78,6 @@ class Historico extends Component{
                             </td>
                             <br/>
                         </tr>
-
                         )})}
 
 

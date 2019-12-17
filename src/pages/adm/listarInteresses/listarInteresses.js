@@ -48,7 +48,7 @@ class listarInteresses extends Component{
     }
 
     buscarInteressados(){
-        fetch('https://localhost:5001/api/classificado/'+ this.state.idClassificado + '/interesses', {
+        fetch('https://localhost:5001/api/classificado/'+ this.state.idClassificado + '/interesse', {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": 'Bearer ' + localStorage.getItem('autenticarlogin')

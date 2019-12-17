@@ -32,8 +32,8 @@ class Login extends Component{
 
         console.log(parseJwt().Roles)
         // window.location.href ="/"
-        if (parseJwt().Roles === 'Administrador') {
-          this.props.history.push('./listarClassificado')
+        if (parseJwt().Role === 'Administrador') {
+          this.props.history.push('listarClassificado')
         }else{
           this.props.history.push('/')
         }
