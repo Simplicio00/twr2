@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import './PaginaDoProduto.css'
 import prdtt from '../../assets/img/macbook.png'
+import Cabecalho from '../../componentes/cabecalho/Cabecalho'
+import Rodape from '../../componentes/rodape/Rodape'
 
 
 
@@ -68,8 +70,8 @@ class PaginaDoProduto extends Component{
 
             
             <body>
-
-        <main style={{height:"120em"}} className="conteudo">
+            <Cabecalho/>
+        <main className="conteudo">
        <section className="produto_conteudo">
            <div className="produto_conteudo_center">
                <div className="box1">
@@ -202,6 +204,7 @@ class PaginaDoProduto extends Component{
            </div>
        </section>
    </main>
+   <Rodape/>
 </body>
 
 

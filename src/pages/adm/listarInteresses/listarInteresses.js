@@ -14,12 +14,20 @@ class listarInteresses extends Component{
         super(props)
         this.state = {
             idClassificado: '',
+
             classificado: [],
-            interessados: []
+            interessados: [],
+
+            // aprovar compra
+            idInteresse: '',
+            interesse: [],
+            comprador: '',
         }
         this.cutUrlInt = this.cutUrlInt.bind(this)
         this.buscarClassificadoId = this.buscarClassificadoId.bind(this)
         this.buscarInteressados = this.buscarInteressados.bind(this)
+        this.aprovarCompra = this.aprovarCompra.bind(this)
+
     }
 
     async componentDidMount(){
@@ -33,22 +41,8 @@ class listarInteresses extends Component{
         var id = url.split('=')[1]
         this.setState({ idClassificado : id })
     }
-
-    aprovarCompra(){
-        fetch('https://localhost:5001/api/interesse/' + this.state.idClassificado +  {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": 'Bearer ' + localStorage.getItem('autenticarlogin')
-                    }
-        })
-        .then(resposta => resposta.json())  
-        .then(data => {this.setState({ classificado : data })
-        ;console.log(this.state.classificado)}
-        ).catch((erro) => console.log(erro))
-    }
-    
-
-    buscarClassificadoId(){
+                
+        buscarClassificadoId(){
         fetch('https://localhost:5001/api/classificado/' + this.state.idClassificado, {
             headers: {
                 "Content-Type": "application/json",
@@ -57,9 +51,9 @@ class listarInteresses extends Component{
         })
         .then(resposta => resposta.json())  
         .then(data => {this.setState({ classificado : data })
-        ;console.log(this.state.classificado)}
+        }
         ).catch((erro) => console.log(erro))
-    }
+        }
 
     buscarInteressados(){
         fetch('https://localhost:5001/api/classificado/'+ this.state.idClassificado + '/interesse', {
@@ -73,11 +67,51 @@ class listarInteresses extends Component{
         }
         ).catch((erro) => console.log(erro))
     }
-    
-   
+
+
+
+    atualizarEstadoComprador(event){
+        this.setState({comprador: event.target.value})
+    }
+
+
+
+    // aprovação de compra
+    aprovarCompra = (event) =>{
+        event.preventDefault();
+        fetch('https://localhost:5001/api/interesse/' + this.state.idClassificado.idInteresse + '/vender', {
+            method: "PUT",
+            headers: {
+                "Content-Type": "Application/json",
+                'Authorization': 'Bearer ' + localStorage.getItem('autenticarlogin')
+            },
+            body: JSON.stringify({comprador: this.state.comprador})
+        })
+        .then(resposta => resposta.json())
+        .then(resposta => {
+            if (resposta.status === 200) {
+                window.location.reload()
+            }
+        }
+        )
+        .then(data => {
+            console.log(data)
+            this.setState({ interesse: data })
+        })
+        .catch((erro) => console.log(erro))
+    }
+
+
+
+
+
+
+
+
 
     render(){
 
+        console.log(this.state.idClassificado)
         return(
 
             <div>
@@ -223,9 +257,12 @@ class listarInteresses extends Component{
                                     <div class="emailUser">
                                         <p>{item.idUsuarioNavigation.email}</p>
                                     </div>
+
                                     <div class="botaoUser">
-                                        <button type="submit"  style={{cursor:"pointer"}}>Definir Comprador</button>
+                                        <button onClick={this.aprovarCompra} value={this.state.comprador} onChange={this.atualizarEstadoComprador} type="submit" style={{cursor:"pointer"}}>Definir Comprador</button>
                                     </div>
+                                
+                                
                                 </div>
                                 )})}
                                 

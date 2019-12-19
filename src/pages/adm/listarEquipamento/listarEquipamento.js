@@ -47,12 +47,13 @@ class listarEquipamento extends Component {
         return (
             <div>
 
-<body style ={{ 
-backgroundImage: "url(" + temaDeFundo + ")",
+<body 
+style={{backgroundImage: "url(" + temaDeFundo + ")",
 backgroundRepeat: "no-repeat",
 backgroundAttachment: "fixed",
 background: "cover",
-backgroundSize: "100%, 60em"}} >
+backgroundSize: "100%, 60em"}}
+>
 <header class="fixed">
     <div id="menu_header_lateral_esquerda_adm">
         <div id="icon_menu_header_adm"><i class="fas fa-bars"></i></div>

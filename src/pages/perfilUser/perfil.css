@@ -30,7 +30,7 @@
     }
 
     #contorno-style{
-        background: #005DFF;
+        background: #00205a;
         width: 389px;
         height: 359px;
         border-radius: 1.5em;
@@ -62,7 +62,7 @@
         width: 103px;
         height: 103px;
         border-radius: 1.5em;
-        border: solid 1px blue;
+        border: solid 1px #00205a;
         box-shadow: 5px -3px 22px rgba(0, 0, 0, 0.5)  ; 
     }
 
@@ -96,7 +96,7 @@
         justify-content: center;
         align-items: center;
         border-radius: 1.1em;
-        border: solid 1px #005DFF;
+        border: solid 1px #00205a;
         align-items: center;
     }
 
@@ -118,12 +118,12 @@
     #po-ord-div-4-flex-btn-perf button{
         width: 155px;
         height: 50px;
-        color: darkblue;
+        color:#00205a;
         background: white;
         padding: 0.5em;
         margin: 0em 0.5em;
         border-radius: 0.8em;
-        border: 1px solid darkblue;
+        border: 1px solid #00205a;
         cursor: pointer;
         font-size: 1em;
         display: flex;
@@ -151,7 +151,7 @@
     #pord-div-4-flex-perf{
         height: 75%;
         width: 100%;
-        background: #005DFF;
+        background: #00205a;
         color: white;
         display: flex;
         flex-direction: column;
@@ -166,7 +166,7 @@
         align-items: center;
         width: 100%;
         height: 27px;
-        margin-bottom: 1.5em;
+        margin: 0.5em 0em;
     }
 
     #pord-div-5-h3-txt img{
@@ -204,7 +204,7 @@
         width: 6em;
         font-size: 1em;
         color: white;
-        background: #005DFF;
+        background: #00205a;
         border: none;
         border-radius: 0.8em;
         cursor: pointer;

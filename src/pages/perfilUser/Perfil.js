@@ -3,7 +3,7 @@ import './perfil.css';
 import img0 from '../../assets/img/perfil.png';
 import img1 from '../../assets/img/lock.png';
 import img2 from '../../assets/img/locked-padlock (1).png';
-import img3 from '../../assets/img/logout.png';
+import img3 from '../../assets/img/logout1.png';
 import Cabecalho from '../../componentes/cabecalho/Cabecalho';
 import Rodape from '../../componentes/rodape/Rodape';
 
@@ -36,7 +36,7 @@ class Perfil extends Component {
         localStorage.clear(); 
         // -> CHAMAR NO BOTÃO DE SAIR 
         
-        window.location.href = './pages/Apresentacao.js';  
+        window.location.href = '/login';  
         // -> REDIRECIONA PARA A PÁGINA DE APRESENTAÇÃO //(INSERIR O LINK DA PÁGINA)
     }
     
@@ -45,20 +45,37 @@ class Perfil extends Component {
         this.setState({senha: event.target.value})
                     }
 
-    alterarSenha = () => {
-        this.setState({loading : true});   
-        fetch('https://localhost:5001/api/Usuario/changePassword', { 
-        method:"PATCH",    
-        headers: { "Content-Type" : "application/json", 
-        'authorization' : 'Bearer ' + localStorage.getItem('autenticarlogin')}
+    alterarSenha = (event) => {
+        event.preventDefault();
+        this.setState({ loading: true });
+        fetch('https://localhost:5001/api/Usuario/changePassword', {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': 'Bearer ' + localStorage.getItem('autenticarlogin')
+            },
+            body:
+                JSON.stringify({ senha: this.state.senha })
         })
+
+        .then(resposta => {
+            if (resposta.status === 200) {
+                window.location.reload()
+            }
+        }
+
+        )
         .then(resposta => resposta.json())
         .then(data => {
-        this.setState({ altSenha : data })
-        this.setState({ loading : false });
+            console.log(data)
+            this.setState({ altSenha: data })
+            this.setState({ loading: false });
         })
-        .catch((erro) => console.log(erro))
-        }
+        
+
+
+            .catch((erro) => console.log(erro))
+    }
 
     userLogado(){
         this.setState({loading : true});   
@@ -125,16 +142,16 @@ class Perfil extends Component {
                                     <div id="pord-div-5-h3-txt"> <h4>Segurança</h4> <img src={img1} /></div>
                                     <div id="pord-div-5-input-perf">
                                             <label for="#">Nova senha</label>
-                                            <input value={this.state.altSenha.senha} onChange={this.alterarSenha} required type="password" />
+                                            <input value={this.state.senha} onChange={this.atualizaSenha} required type="password" />
                                             </div>
                                         </div>
                                         <div id="pord-div-5-btn-perf">  
-                                            <button type="submit">Confirmar</button> <button onClick={this.mostrar}>Cancelar</button>
+                                            <button onClick={this.alterarSenha} type="submit">Confirmar</button> <button onClick={this.mostrar}>Cancelar</button>
                                         </div>
                                 </form>
                          </div>
                         <div id="po-ord-div-4-flex-btn-perf">
-                            <button onClick={this.mostrar}>Alterar senha <div class="btn-img"><img src={img2} /></div></button> <button> Sair <div class="btn-img"><img src={img3}/></div></button>
+                            <button onClick={this.mostrar}>Alterar senha <div class="btn-img"><img src={img2} /></div></button> <button onClick={this.logout}> Sair <div class="btn-img"><img src={img3}/></div></button>
                         </div>
                 </div>
 

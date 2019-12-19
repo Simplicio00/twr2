@@ -66,7 +66,7 @@ class Cadastro extends Component{
         .then(resposta => {
             if (resposta.status === 200) {
                 console.log('Cadastro de usuário concluído com sucesso') 
-                window.location.href ="../Bem vindo"
+                window.location.href ="/Bem vindo"
             }
         })
     }

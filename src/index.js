@@ -24,6 +24,7 @@ import cadastrarEquipamento from './pages/adm/cadastrarEquipamento/cadastroEquip
 import listarClassificado from './pages/adm/listarClassificado/DashboardClassificados'
 import cadastrarClassificado from './pages/adm/cadastrarClassificado/DashboardCadastrarClassificado'
 import listarClassificadoInteresses from './pages/adm/listarInteresses/listarInteresses'
+import esqueciAsenha from './pages/EsqueceuSenha/EsqueciSenha'
 
 
 
@@ -60,13 +61,15 @@ const Rota = (
                                 {/* páginas de usuario */}
                 <Route path='/Cadastro' component={cadastro}/>  
                 <Route path='/Bem vindo' component={cadastroConcluido} />               
-                <Route path='/Login' component={login} />
                 <Route path='/Apresentacao' component={apresentacao}/> 
+                <Route path='/Login' component={login} />
+                <Route path='/esqueciAsenha' component={esqueciAsenha}/>  
                 <ContriAuth exact path ='/' component={home}/>
                 <ContriAuth path='/Historico' component= {historicoInteresse}/>
                 <ContriAuth path='/Historico de compras' component={historicoCompras}/>
                 <ContriAuth path='/Perfil' component={perfil}/>    
                 <ContriAuth path='/Produto' component={produto}/>  
+
                       
                                 {/* páginas de adm  */}
                 <AdminAuth path='/DashUsuario' component={listarUser} />
